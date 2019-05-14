@@ -103,7 +103,7 @@ public abstract class AbstractTarget implements Target {
 
     public void build(List<File> objectFiles) throws IOException {
         File outFile = new File(config.getTmpDir(), config.getExecutableName());
-        
+	System.out.println("final build 0001");        
         config.getLogger().info("Building %s binary %s", config.getTarget().getType(), outFile);
         
         LinkedList<String> ccArgs = new LinkedList<String>();
@@ -113,7 +113,7 @@ public abstract class AbstractTarget implements Target {
         libs.addAll(getTargetLibs());
         
         String libSuffix = config.isUseDebugLibs() ? "-dbg" : "";
-        
+       	System.out.println("final build 0002"); 
         libs.add("-lrobovm-bc" + libSuffix); 
         if (config.getOs().getFamily() == OS.Family.darwin) {
             libs.add("-force_load");
@@ -124,18 +124,20 @@ public abstract class AbstractTarget implements Target {
         if (config.isSkipInstall()) {
             libs.add("-lrobovm-debug" + libSuffix);
         }
+	System.out.println("final build 0003");
         libs.addAll(Arrays.asList(
                 "-lrobovm-core" + libSuffix, "-lgc" + libSuffix, "-lpthread", "-ldl", "-lm", "-lz"));
         if (config.getOs().getFamily() == OS.Family.linux) {
             libs.add("-lrt");
         }
+	System.out.println("final build 0004");
         if (config.getOs().getFamily() == OS.Family.darwin) {
             libs.add("-liconv");
             libs.add("-lsqlite3");
             libs.add("-framework");
             libs.add("Foundation");
         }
-        
+        System.out.println("final build 0005");
         ccArgs.add("-L");
         ccArgs.add(config.getOsArchDepLibDir().getAbsolutePath());
 
@@ -143,7 +145,7 @@ public abstract class AbstractTarget implements Target {
         exportedSymbols.addAll(getTargetExportedSymbols());
         exportedSymbols.add("JNI_OnLoad_*");
         exportedSymbols.addAll(config.getExportedSymbols());
-
+	System.out.println("final build 0006");
         if (config.getOs().getFamily() == OS.Family.linux) {
             ccArgs.add("-Wl,-rpath=$ORIGIN");
             ccArgs.add("-Wl,--gc-sections");
@@ -196,7 +198,7 @@ public abstract class AbstractTarget implements Target {
             ccArgs.add("-Wl,-no_implicit_dylibs");
             ccArgs.add("-Wl,-dead_strip");
         }
-        
+        System.out.println("final build 0008");
         if (config.getOs().getFamily() == OS.Family.darwin && !config.getFrameworks().isEmpty()) {
             for (String p : config.getFrameworks()) {
                 libs.add("-framework");
@@ -214,7 +216,7 @@ public abstract class AbstractTarget implements Target {
                 ccArgs.add("-F" + p.getAbsolutePath());
             }
         }
-        
+        System.out.println("final build 0009");
         if (!config.getLibs().isEmpty()) {
             objectFiles = new ArrayList<File>(objectFiles);
             for (Config.Lib lib : config.getLibs()) {
@@ -258,14 +260,16 @@ public abstract class AbstractTarget implements Target {
                 libs.add("MobileCoreServices");
             }
         }
-        
+       	System.out.println("final build 0010"); 
         doBuild(outFile, ccArgs, objectFiles, libs);
+	System.out.println("final build 0011");
     }
     
     protected void doBuild(File outFile, List<String> ccArgs, List<File> objectFiles, 
             List<String> libs) throws IOException {
-        
+       	System.out.println("final do build 0001"); 
         ToolchainUtil.link(config, ccArgs, objectFiles, libs, outFile);        
+    	System.out.println("final do build 0002");
     }
 
     protected String getExecutable() {

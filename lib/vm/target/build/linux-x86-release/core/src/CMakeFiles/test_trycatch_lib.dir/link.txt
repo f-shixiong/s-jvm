@@ -1,0 +1,2 @@
+/bin/ar cr libtest_trycatch_lib.a  CMakeFiles/test_trycatch_lib.dir/test/test_trycatch.c.o CMakeFiles/test_trycatch_lib.dir/test/CuTest.c.o CMakeFiles/test_trycatch_lib.dir/trycatch-linux-x86.s.o
+/bin/ranlib libtest_trycatch_lib.a

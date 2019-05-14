@@ -302,7 +302,6 @@ public class AppCompiler {
 
     private boolean compile(Executor executor, ClassCompilerListener listener,
             Clazz clazz, Set<Clazz> compileQueue, Set<Clazz> compiled) throws IOException {
-
         boolean result = false;
         if (config.isClean() || classCompiler.mustCompile(clazz)) {
             classCompiler.compile(clazz, executor, listener);
@@ -446,25 +445,36 @@ public class AppCompiler {
     }
 
     private void compile() throws IOException {
-        updateCheck();
+        
+	System.out.println("new way true");
+	updateCheck();
 
         Set<Clazz> linkClasses = compile(getRootClasses(), true, null);
-
+	System.out.println("new way 0001");
+	System.out.println(linkClasses.size());
         if (Thread.currentThread().isInterrupted()) {
             return;
         }
-
+	System.out.println("new way 0002");
         if (linkClasses.contains(config.getClazzes().load(TRUSTED_CERTIFICATE_STORE_CLASS))) {
-            if (config.getCacerts() != null) {
+            System.out.println("come in");
+	    if (config.getCacerts() != null) {
                 config.addResourcesPath(config.getClazzes().createResourcesBootclasspathPath(
                         config.getHome().getCacertsPath(config.getCacerts())));
             }
-        }
+        }else{
+	    System.out.println("no come in");
+	}
+
+	System.out.println("new way 0003");
 
         long start = System.currentTimeMillis();
+	// panic reason ！！！ link失败 fan_hook
         linker.link(linkClasses);
+	System.out.println("new way 0004");
         long duration = System.currentTimeMillis() - start;
         config.getLogger().info("Linked %d classes in %.2f seconds", linkClasses.size(), duration / 1000.0);
+	System.out.println("new way 0005");
     }
 
     public static void main(String[] args) throws IOException {
@@ -478,9 +488,10 @@ public class AppCompiler {
         List<Arch> archs = new ArrayList<>();
         String dumpConfigFile = null;
         List<String> runArgs = new ArrayList<String>();
+	System.out.println("--oy--");
         try {
             builder = new Config.Builder();
-            Map<String, PluginArgument> pluginArguments = builder.fetchPluginArguments();
+	    Map<String, PluginArgument> pluginArguments = builder.fetchPluginArguments();
 
             int i = 0;
             while (i < args.length) {
@@ -667,12 +678,13 @@ public class AppCompiler {
                 }
                 i++;
             }
-
+	    System.out.println("this step 001");	
             builder.archs(archs.toArray(new Arch[archs.size()]));
-
+	    System.out.println("this step 002");
             while (i < args.length) {
                 runArgs.add(args[i++]);
             }
+		
 
             if (archive && run) {
                 throw new IllegalArgumentException("Specify either -run or -createipa/-archive, not both");
@@ -680,7 +692,7 @@ public class AppCompiler {
 
             builder.logger(new ConsoleLogger(verbose));
             builder.skipInstall(run);
-
+	    System.out.println("this step 003");
             if (dumpConfigFile != null) {
                 if (dumpConfigFile.equals("-")) {
                     builder.write(new OutputStreamWriter(System.out), new File("."));
@@ -694,9 +706,9 @@ public class AppCompiler {
                 }
                 return;
             }
-
+	    System.out.println("this step 004");
             compiler = new AppCompiler(builder.build());
-
+	    System.out.println("this step 005");
         } catch (Throwable t) {
             String message = t.getMessage();
             if (t instanceof ArrayIndexOutOfBoundsException) {
@@ -708,20 +720,28 @@ public class AppCompiler {
             if (verbose && !(t instanceof StringIndexOutOfBoundsException) && !(t instanceof IllegalArgumentException)) {
                 t.printStackTrace();
             }
+	    t.printStackTrace();
             printUsageAndExit(message, builder != null ? builder.getPlugins() : null);
         }
 
         try {
             if (archive) {
                 compiler.build();
+		System.out.println("this step 006");
                 compiler.archive();
             } else {
+		System.out.println("o this way 001");
                 if (run && !compiler.config.getTarget().canLaunch()) {
                     throw new IllegalArgumentException("Cannot launch when building " 
                             + compiler.config.getTarget().getType() + " binaries");
                 }
+		System.out.println("o this way 002");
+		System.out.println(run);
                 if (run) {
+
+		    System.out.println("o this way 003");
                     compiler.compile(); // Just compile the first slice if multiple archs have been specified
+		    System.out.println("o this way 004");
                     LaunchParameters launchParameters = compiler.config.getTarget().createLaunchParameters();
                     if (launchParameters instanceof IOSSimulatorLaunchParameters) {
                         IOSSimulatorLaunchParameters simParams = (IOSSimulatorLaunchParameters) launchParameters;
@@ -739,8 +759,11 @@ public class AppCompiler {
                     launchParameters.setArguments(runArgs);
                     compiler.launch(launchParameters);
                 } else {
+		    System.out.println("o this way 007");
                     compiler.build();
+		    System.out.println("o this way 007.5");
                     compiler.config.getTarget().install();
+		    System.out.println("o this way 008");
                 }
             }
         } catch (Throwable t) {
@@ -757,15 +780,19 @@ public class AppCompiler {
      */
     public void build() throws IOException {
         List<Arch> archs = this.config.getArchs();
-        if (archs.isEmpty()) {
+        System.out.println("new step 001");
+	if (archs.isEmpty()) {
             archs = config.getTarget().getDefaultArchs();
         }
+	System.out.println("new step 002");
         if (archs.isEmpty()) {
             throw new IllegalArgumentException("No archs specified in config");
         }
         if (archs.size() == 1 && this.config.getArch().equals(archs.get(0))) {
             // No need to clone configs for each slice.
+	    System.out.println("new step 003");
             compile();
+	    System.out.println("new step 004");
         } else {
             Map<Arch, File> slices = new TreeMap<>();
             for (Arch arch : archs) {
@@ -782,6 +809,7 @@ public class AppCompiler {
                     }
                 }
             }
+	    System.out.println("new step 004");
             this.config.getTarget().buildFat(slices);
         }
     }

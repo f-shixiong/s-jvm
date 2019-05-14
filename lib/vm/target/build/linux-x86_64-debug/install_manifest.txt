@@ -1,0 +1,5 @@
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/binaries/linux/x86_64/libgc-dbg.a
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/binaries/linux/x86_64/librobovm-core-dbg.a
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/binaries/linux/x86_64/librobovm-debug-dbg.a
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/binaries/linux/x86_64/librobovm-bc-dbg.a
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/binaries/linux/x86_64/librobovm-rt-dbg.a

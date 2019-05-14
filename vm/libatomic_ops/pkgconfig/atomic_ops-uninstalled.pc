@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+top_builddir=/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/libatomic_ops
+top_srcdir=/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/target/build/linux-x86_64-debug/extgc-prefix/src/extgc/libatomic_ops
+
+Name: The atomic_ops library (uninstalled)
+Description: Atomic memory update operations
+Version: 7.5.0
+Libs: ${top_builddir}/src/libatomic_ops.la
+Cflags: -I${top_builddir}/src -I${top_srcdir}/src

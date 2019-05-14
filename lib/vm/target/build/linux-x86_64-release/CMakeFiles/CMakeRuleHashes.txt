@@ -1,0 +1,19 @@
+# Hashes of file build rules.
+f0dac7a78dc823f5c2c83b67511a4238 CMakeFiles/extgc
+0cd8761b94f9470097f8455605ba92b6 CMakeFiles/extgc-complete
+f0dac7a78dc823f5c2c83b67511a4238 CMakeFiles/libatomic_ops
+8b2a7f5caf7413d06f3b3f3a380266f2 CMakeFiles/libatomic_ops-complete
+586988361bbc8e3ccdd094a43a93c59b extgc-prefix/src/extgc-stamp/extgc-build
+287546a2d1d247db6cbfa8c1fc1ed8e4 extgc-prefix/src/extgc-stamp/extgc-configure
+086617d56376a29ae599b5025cf01a3a extgc-prefix/src/extgc-stamp/extgc-download
+14796d191ee656c10ad3e57b9a6a7488 extgc-prefix/src/extgc-stamp/extgc-install
+904f3bdfeecba7898cc2883bb0b4470f extgc-prefix/src/extgc-stamp/extgc-mkdir
+8adeec7693b8ba0206ad1b791bb22187 extgc-prefix/src/extgc-stamp/extgc-patch
+5915da987696f107e0a2d0f15e437e98 extgc-prefix/src/extgc-stamp/extgc-update
+a86262dd6241501425e17195f8971123 libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-build
+dfe72809d4101801ba224ecdaf1489a2 libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-configure
+6383b18a5e1c0adcfcd7b70399f5662d libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-download
+2d818cc2ead8b0c5ebef2c746049d285 libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-install
+05612b2e96b0b0d73242fa46a2d1c32b libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-mkdir
+5cb2599a8baf121a3933da4d07570262 libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-patch
+e0fd8e234610f87600e1311efc780b82 libatomic_ops-prefix/src/libatomic_ops-stamp/libatomic_ops-update

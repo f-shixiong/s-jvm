@@ -1,0 +1,2 @@
+/bin/ar cr librobovm-bc-dbg.a  CMakeFiles/robovm-bc.dir/bc.c.o CMakeFiles/robovm-bc.dir/classinfo.c.o CMakeFiles/robovm-bc.dir/MurmurHash3.c.o
+/bin/ranlib librobovm-bc-dbg.a

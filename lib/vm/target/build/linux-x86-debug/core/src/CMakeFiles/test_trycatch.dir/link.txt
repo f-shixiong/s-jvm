@@ -1,0 +1,1 @@
+/bin/gcc  -g  -Wall -fdata-sections -ffunction-sections -fPIC -m32  -std=gnu99 -fPIC     -fPIC -m32 CMakeFiles/test_trycatch.dir/test/test_trycatch.c.o CMakeFiles/test_trycatch.dir/test/CuTest.c.o CMakeFiles/test_trycatch.dir/trycatch-linux-x86.s.o  -o test_trycatch -rdynamic 

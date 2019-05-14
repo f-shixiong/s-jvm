@@ -186,21 +186,22 @@ public class Linker {
         for (CompilerPlugin plugin : config.getCompilerPlugins()) {
             plugin.beforeLinker(config, this, classes);
         }
-
+	System.out.println("linker this 001");
         Arch arch = config.getArch();
         OS os = config.getOs();
 
         Set<Clazz> linkClasses = new TreeSet<Clazz>(classes);
         config.getLogger().info("Linking %d classes (%s %s %s)", linkClasses.size(),
                 os, arch, config.isDebug() ? "debug" : "release");
-
+	System.out.println("linker this 002");
         ModuleBuilder mb = new ModuleBuilder();
         mb.addInclude(getClass().getClassLoader().getResource(String.format("header-%s-%s.ll", os.getFamily(), arch)));
         mb.addInclude(getClass().getClassLoader().getResource("header.ll"));
-
+	System.out.println("linker this 003");
         mb.addGlobal(new Global("_bcRuntimeData", runtimeDataToBytes()));
 
         ArrayConstantBuilder staticLibs = new ArrayConstantBuilder(I8_PTR);
+	System.out.println("linker this 004");
         for (Config.Lib lib : config.getLibs()) {
             String p = lib.getValue();
             if (p.endsWith(".a")) {
@@ -212,6 +213,7 @@ public class Linker {
                 staticLibs.add(mb.getString(libName));
             }
         }
+	System.out.println("linker this 005");
         staticLibs.add(new NullConstant(Type.I8_PTR));
         mb.addGlobal(new Global("_bcStaticLibs",
                 new ConstantGetelementptr(mb.newGlobal(staticLibs.build()).ref(), 0, 0)));
@@ -221,6 +223,7 @@ public class Linker {
         HashTableGenerator<String, Constant> cpHashGen = new HashTableGenerator<String, Constant>(
                 new ModifiedUtf8HashFunction());
         int classCount = 0;
+	System.out.println("linker this 006");
         Map<ClazzInfo, TypeInfo> typeInfos = new HashMap<ClazzInfo, TypeInfo>();
         for (Clazz clazz : linkClasses) {
             TypeInfo typeInfo = new TypeInfo();
@@ -243,6 +246,7 @@ public class Linker {
                 cpHashGen.put(clazz.getInternalName(), new ConstantBitcast(info.ref(), I8_PTR));
             }
         }
+	System.out.println("linker this 007");
         mb.addGlobal(new Global("_bcBootClassesHash", new ConstantGetelementptr(mb.newGlobal(bcpHashGen.generate(),
                 true).ref(), 0, 0)));
         mb.addGlobal(new Global("_bcClassesHash", new ConstantGetelementptr(mb.newGlobal(cpHashGen.generate(), true)
@@ -266,6 +270,7 @@ public class Linker {
                 classpathValues.add(mb.getString(entryName));
             }
         }
+	System.out.println("linker this 008");
         bootClasspathValues.add(new NullConstant(Type.I8_PTR));
         classpathValues.add(new NullConstant(Type.I8_PTR));
         mb.addGlobal(new Global("_bcBootclasspath", new ConstantGetelementptr(mb.newGlobal(bootClasspathValues.build())
@@ -300,7 +305,7 @@ public class Linker {
         stubRefsArray.add(new NullConstant(I8_PTR));
         
         mb.addGlobal(new Global("_bcStrippedMethodStubs", stubRefsArray.build()));
-        
+	System.out.println("linker this 009");
         Random rnd = new Random();
 
         buildTypeInfos(typeInfos);
@@ -308,6 +313,7 @@ public class Linker {
         Set<String> checkcasts = new HashSet<>();
         Set<String> instanceofs = new HashSet<>();
         Set<String> invokes = new HashSet<>();
+	System.out.println("linker this 0010");
         for (Clazz clazz : linkClasses) {
             ClazzInfo ci = clazz.getClazzInfo();
             checkcasts.addAll(ci.getCheckcasts());
@@ -322,6 +328,7 @@ public class Linker {
         
         int totalMethodCount = 0;
         int reachableMethodCount = 0;
+	System.out.println("linker this 0011");
         for (Clazz clazz : linkClasses) {
             int mbIdx = rnd.nextInt(mbs.length - 1) + 1;
             ClazzInfo ci = clazz.getClazzInfo();
@@ -399,7 +406,7 @@ public class Linker {
             }
         }
         config.getLogger().info("%d methods out of %d included in the executable", reachableMethodCount, totalMethodCount);
-
+	System.out.println("linker this 0012");
         List<File> objectFiles = new ArrayList<File>();
 
         generateMachineCode(config, mbs, objectFiles);
@@ -411,14 +418,16 @@ public class Linker {
         /*
          * Assemble the lines files for all linked classes into the module.
          */
+	System.out.println("linker this 0013");
         for (Clazz clazz : linkClasses) {
             File f = config.getLinesOFile(clazz);
             if (f.exists() && f.length() > 0) {
                 objectFiles.add(f);
             }
         }
-
+	System.out.println("linker this 0015");
         config.getTarget().build(objectFiles);
+	System.out.println("linker this 0016");
     }
 
     private void generateMachineCode(final Config config, ModuleBuilder[] mbs,

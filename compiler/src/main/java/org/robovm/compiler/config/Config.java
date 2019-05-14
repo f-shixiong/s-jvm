@@ -218,7 +218,7 @@ public class Config {
 
     protected Config() throws IOException {
         // Add standard plugins
-        this.plugins.addAll(0, Arrays.asList(
+	this.plugins.addAll(0, Arrays.asList(
                 new InterfaceBuilderClassesPlugin(),
                 new ObjCProtocolProxyPlugin(),
                 new ObjCMemberPlugin(),
@@ -776,7 +776,7 @@ public class Config {
         // Create a clone of this Config before we have done anything with it so
         // that builder() has a fresh Config it can use.
         this.configBeforeBuild = clone(this);
-
+	System.out.println("o this step 001");
         if (home == null) {
             home = Home.find();
         }
@@ -800,8 +800,9 @@ public class Config {
         if (!skipLinking && executableName == null && mainClass == null) {
             throw new IllegalArgumentException("No target and no main class specified");
         }
-
-        if (!skipLinking && classpath.isEmpty()) {
+	
+	//hard code
+        if (false && !skipLinking && classpath.isEmpty()) {
             throw new IllegalArgumentException("No classpath specified");
         }
 
@@ -912,7 +913,8 @@ public class Config {
         }
 
         protected Home(File homeDir, boolean validate) {
-            if (validate) {
+            //fuck hard code
+	    if (validate && false) {
                 validate(homeDir);
             }
             binDir = new File(homeDir, "bin");
@@ -1000,9 +1002,11 @@ public class Config {
             }
 
             File libDir = new File(dir, "lib");
-            if (!libDir.exists() || !libDir.isDirectory()) {
-                throw new IllegalArgumentException(error + "lib/ missing or invalid");
-            }
+//fsx hard code 
+
+            //if (!libDir.exists() || !libDir.isDirectory()) {
+            //    throw new IllegalArgumentException(error + "lib/ missing or invalid");
+            //}
             File binDir = new File(dir, "bin");
             if (!binDir.exists() || !binDir.isDirectory()) {
                 throw new IllegalArgumentException(error + "bin/ missing or invalid");
@@ -1073,11 +1077,11 @@ public class Config {
         final Config config;
 
         Builder(Config config) {
-            this.config = config;
+	    this.config = config;
         }
 
         public Builder() throws IOException {
-            this.config = new Config();
+	    this.config = new Config();
         }
 
         public Builder os(OS os) {

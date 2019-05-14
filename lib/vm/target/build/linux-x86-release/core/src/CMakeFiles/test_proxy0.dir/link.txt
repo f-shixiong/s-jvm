@@ -1,0 +1,1 @@
+/bin/gcc  -Os -DNDEBUG  -Wall -fdata-sections -ffunction-sections -fPIC -m32  -std=gnu99 -fPIC     -fPIC -m32 CMakeFiles/test_proxy0.dir/test/test_proxy0.c.o CMakeFiles/test_proxy0.dir/test/CuTest.c.o CMakeFiles/test_proxy0.dir/proxy0-linux-x86.s.o CMakeFiles/test_proxy0.dir/unwind.c.o  -o test_proxy0 -rdynamic 

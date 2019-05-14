@@ -1,0 +1,2 @@
+/bin/ar cr libtest_proxy0_lib.a  CMakeFiles/test_proxy0_lib.dir/test/test_proxy0.c.o CMakeFiles/test_proxy0_lib.dir/test/CuTest.c.o CMakeFiles/test_proxy0_lib.dir/proxy0-linux-x86.s.o CMakeFiles/test_proxy0_lib.dir/unwind.c.o
+/bin/ranlib libtest_proxy0_lib.a

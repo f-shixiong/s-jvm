@@ -1,0 +1,1 @@
+/bin/gcc  -Os -DNDEBUG  -Wall -fdata-sections -ffunction-sections -fPIC -m64  -std=gnu99 -fPIC     -fPIC -m64 CMakeFiles/test_call0.dir/test/test_call0.c.o CMakeFiles/test_call0.dir/test/CuTest.c.o CMakeFiles/test_call0.dir/call0-linux-x86_64.s.o CMakeFiles/test_call0.dir/unwind.c.o  -o test_call0 -rdynamic 

@@ -1,0 +1,2 @@
+/bin/ar cr librobovm-debug.a  CMakeFiles/robovm-debug.dir/debug.c.o
+/bin/ranlib librobovm-debug.a

@@ -1,0 +1,2 @@
+/bin/ar cr libtest_call0_lib.a  CMakeFiles/test_call0_lib.dir/test/test_call0.c.o CMakeFiles/test_call0_lib.dir/test/CuTest.c.o CMakeFiles/test_call0_lib.dir/call0-linux-x86.s.o CMakeFiles/test_call0_lib.dir/unwind.c.o
+/bin/ranlib libtest_call0_lib.a

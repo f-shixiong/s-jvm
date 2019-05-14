@@ -347,6 +347,7 @@ public class ToolchainUtil {
          * 
          * The linker on Linux will fail if we don't quote paths with spaces.
          */
+	System.out.println("final do build 0002");
         List<File> objectsFiles = writeObjectsFiles(config, objectFiles, isDarwin ? 0xffff : Integer.MAX_VALUE,
                 !isDarwin);
 
@@ -354,6 +355,7 @@ public class ToolchainUtil {
         if (config.isDebug()) {
             opts.add("-g");
         }
+	System.out.println("final do build 0003");
         if (isDarwin) {
             opts.add("-arch");
             opts.add(config.getArch().getClangName());
@@ -367,8 +369,17 @@ public class ToolchainUtil {
             }
         }
         opts.addAll(args);
+	System.out.println("final do build 0004");
+	System.out.println(outFile);
+	System.out.println(opts);
+	System.out.println(libs);
+        Executor exe = new Executor(config.getLogger(), getCcPath(config)).args("-o", outFile, opts, libs);
+	//new Executor(config.getLogger(), getCcPath(config)).args("-o", outFile, opts, libs).exec();
+	
 
-        new Executor(config.getLogger(), getCcPath(config)).args("-o", outFile, opts, libs).exec();
+	System.out.println("final do build 0005");
+    	exe.exec();
+	System.out.println("final do build 0006");
     }
 
     private static String getCcPath(Config config) throws IOException {

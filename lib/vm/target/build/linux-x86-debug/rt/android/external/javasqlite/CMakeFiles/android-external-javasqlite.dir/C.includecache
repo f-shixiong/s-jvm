@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../../rt/android/external/javasqlite/../sqlite/dist/sqlite3.h
+stdarg.h
+-
+
+../../../rt/android/libnativehelper/include/nativehelper/jni.h
+stdarg.h
+-
+stdint.h
+-
+
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite_jni.c
+sqlite_jni_defs.h
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite_jni_defs.h
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+sqlite.h
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite.h
+sqlite3.h
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite3.h
+sqlite_jni.h
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite_jni.h
+
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite_jni.h
+jni.h
+-
+
+/home/jon-wwr/work/src/github.com/f-shixiong/s-jvm/vm/rt/android/external/javasqlite/src/main/native/sqlite_jni_defs.h
+
